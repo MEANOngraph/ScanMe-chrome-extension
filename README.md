@@ -14,7 +14,7 @@ code for their website, social media profile, or any other online presence.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/Mahesh9785/ScanMe-chrome-extension.git`
+1. Clone the repository: `git clone https://github.com/MEANOngraph/ScanMe-chrome-extension.git`
 2. Navigate to the Backend folder: `cd ScanMeBackend`
 3. Install dependencies: `npm install`
 
