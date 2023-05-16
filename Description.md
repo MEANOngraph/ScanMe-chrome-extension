@@ -122,6 +122,7 @@ angular.json
       "minify": true,
       "inlineCritical": false
 }
+}
 ```
 ### Step 4: Building the Extension
 
