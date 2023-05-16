@@ -4,7 +4,6 @@ const fs = require("fs");
 
 const sendMailWithAttachment = async (req, res) => {
     const userId=req.params.userId;
-    console.log(req.body);
   const email = req.body.email;
   const filename = req.body.filename;
 

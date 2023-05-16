@@ -18,9 +18,6 @@ let transporter = nodemailer.createTransport({
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
-  } else {
-    console.log("Ready for messages");
-    console.log(success);
   }
 });
 
@@ -73,7 +70,6 @@ const sendVerificationEmail = ({ _id, email }, res) => {
   // url to be used in the email
   const currentUrl = "http://localhost:3000/";
   const uniqueString = uuidv4() + _id;
-  console.log(uniqueString)
 
   // mail options
   const mailOptions = {
@@ -172,7 +168,6 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                 message: "Please provide a valid email address"+ err,
               });
             }else{
-              // console.log("mail info",info);
               res.json({
                 success:"User Successfully registered",
                 status: "PENDING",

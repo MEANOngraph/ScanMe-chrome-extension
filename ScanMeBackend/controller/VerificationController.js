@@ -9,9 +9,7 @@ const verifyEmail = async (req, res) => {
   await UserVerification.find({ userId:userId })
     .then(async (result) => {
       if (result.length > 0) {
-        console.log(result[0]);
         const { expiresAt } = result[0];
-        console.log(expiresAt);
         const hashedUniqueString = result[0].uniqueString;
         // checking for expired unique string
         if (expiresAt < Date.now()) {
@@ -37,9 +35,6 @@ const verifyEmail = async (req, res) => {
         } else {
             // valid record exists so we validate the user string
             // First compare the hashed unique string
-            console.log("uniqueString",uniqueString);
-            console.log("hashedUniqueString",hashedUniqueString);
-            console.log(await bcrypt.compare(uniqueString, hashedUniqueString));
             if(await bcrypt.compare(uniqueString, hashedUniqueString))
             {
             if (result) {
@@ -94,14 +89,11 @@ const verifyEmail = async (req, res) => {
 const verifyUpdatedEmail = async (req, res) => {
   let email=req.params.email;
   
-  console.log(email);
   let { userId, uniqueString } = req.params;
   await UserVerification.find({ userId:userId })
     .then(async (result) => {
       if (result.length > 0) {
-        console.log(result[0]);
         const { expiresAt } = result[0];
-        console.log(expiresAt);
         const hashedUniqueString = result[0].uniqueString;
         // checking for expired unique string
         if (expiresAt < Date.now()) {
@@ -119,9 +111,6 @@ const verifyUpdatedEmail = async (req, res) => {
         } else {
             // valid record exists so we validate the user string
             // First compare the hashed unique string
-            console.log("uniqueString",uniqueString);
-            console.log("hashedUniqueString",hashedUniqueString);
-            console.log(await bcrypt.compare(uniqueString, hashedUniqueString));
             if(await bcrypt.compare(uniqueString, hashedUniqueString))
             {
             if (result) {

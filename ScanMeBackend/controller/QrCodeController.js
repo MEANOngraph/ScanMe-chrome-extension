@@ -20,7 +20,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const userId = req.params.userId;
 
-    console.log(file.originalname);
     const filename = file.originalname.replace(/:/g, '-');
     qrCodeImageName=userId+'_'+ filename;
     // cb(null, userId+'_'+ filename);
@@ -55,7 +54,6 @@ const saveQr = async (req, res) => {
     const { userId, qrName, qrData } = req.body;
     const existingQrCodes = await qrCodesModel.findOne({ userId:userId }).exec();
 
-    console.log(existingQrCodes)
     
     if (existingQrCodes) {
       let flag='';
@@ -147,7 +145,6 @@ const updateQr = async (req, res) => {
 
     const existingQrCodes = await qrCodesModel.findOne({ userId }).exec();
 
-    console.log(existingQrCodes);
 
     if (existingQrCodes) {
       let flag = false;
@@ -181,7 +178,6 @@ const updateQr = async (req, res) => {
           });
         } else {
           // updateResult contains the updated document
-          console.log("updateResult", updatedDocument);
           res.json({
             success: true,
             status: "DELETED",
@@ -209,11 +205,9 @@ const updateQr = async (req, res) => {
 
   //Get profile picture
 const sendQr = async (req, res) => {
-  // console.log(req.body);
   try{
   const userId=req.params.userId;
   const result=await qrCodesModel.findOne({userId:userId});
-  // console.log("userId",userId);
 
   if(result){
   const directoryPath = path.join(`./public/Qr_Codes/${userId}`);

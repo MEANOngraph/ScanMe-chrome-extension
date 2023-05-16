@@ -21,9 +21,6 @@ let transporter = nodemailer.createTransport({
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
-  } else {
-    console.log("Ready for messages");
-    console.log(success);
   }
 });
 
@@ -75,13 +72,11 @@ const storage = multer.diskStorage({
           message: "User with the provided userId doesn't exist",
         });
       } else {
-        console.log(updatedUser);
         res.json({
           success: updatedUser,
           status: "UPDATED",
           message: "User updated successfully!",
         });
-        console.log("User updated successfully!");
       }
     } catch (err) {
       console.error(err);
@@ -94,7 +89,6 @@ const storage = multer.diskStorage({
 
   const updatePassword = async (req, res) => {
     try {
-      console.log(req.body)
       const updatedUser = await User.findOne(
         { _id: req.params.userId },
       );
@@ -114,7 +108,6 @@ const storage = multer.diskStorage({
           status: "UPDATED",
           message: "User password updated successfully!",
         });
-        console.log("User updated successfully!");
       }else{
       res.status(500).json({
         status: "FAILED",
@@ -158,7 +151,6 @@ const storage = multer.diskStorage({
           status: "UPDATED",
           message: "User password updated successfully!",
         });
-        console.log("User password updated successfully!");
       }else{
       res.status(500).json({
         status: "FAILED",
@@ -185,10 +177,8 @@ const getProfilePicture = async (req, res) => {
       res.status(500).send(err);
     } else {
       const userId = req.params.userId;
-      // console.log(userId);
 
       const userFiles = files.filter(file => file.startsWith(userId));
-      // console.log("userFiles : "+userFiles)
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(userFiles));
     }
@@ -196,7 +186,6 @@ const getProfilePicture = async (req, res) => {
 };
 
 const sendVerificationEmail = async (req,res)=>{
-  console.log("body",req.body);  
   let userId=req.body.userId;
   let email=req.body.email;
   sendEmail({_id:userId,email:email},res);
@@ -204,13 +193,10 @@ const sendVerificationEmail = async (req,res)=>{
 
 // send verification email
 const sendEmail = ({ _id, email }, res) => {
-  console.log("userId",_id);
-  console.log("email", email);
 
   // url to be used in the email
   const currentUrl = "http://localhost:3000/";
   const uniqueString = uuidv4() + _id;
-  console.log(uniqueString)
 
   // mail options
   const mailOptions = {
@@ -309,7 +295,6 @@ const sendEmail = ({ _id, email }, res) => {
                 message: "Please provide a valid email address"+ err,
               });
             }else{
-              // console.log("mail info",info);
             
                 res.status(200).json({
                   success: true,
